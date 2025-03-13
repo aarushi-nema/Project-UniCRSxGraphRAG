@@ -9,7 +9,6 @@ output.zip
 cache/
 embedding_cache/
 __pycache__/
-log/
 dialogue_outputs/
 Recommendation_GraphRAG/output/
 Recommendation_GraphRAG/dialogues
