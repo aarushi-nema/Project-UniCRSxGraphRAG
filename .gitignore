@@ -1,5 +1,4 @@
 # Files to ignore
-*.log
 .env
 nohup.out
 __init__.py
