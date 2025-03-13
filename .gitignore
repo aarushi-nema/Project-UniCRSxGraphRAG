@@ -1,0 +1,16 @@
+# Files to ignore
+*.log
+.env
+nohup.out
+__init__.py
+output.zip
+
+# Folders to ignore
+cache/
+embedding_cache/
+__pycache__/
+log/
+dialogue_outputs/
+Recommendation_GraphRAG/output/
+Recommendation_GraphRAG/dialogues
+old_successful_results/
