@@ -81,13 +81,13 @@ cache:
 
 storage:
   type: file # or blob
-  base_dir: "output/${FILE_NAME}/artifacts"
+  base_dir: "output/test_dialogue/artifacts"
   # connection_string: <azure_blob_storage_connection_string>
   # container_name: <azure_blob_storage_container_name>
 
 reporting:
   type: file # or console, blob
-  base_dir: "output/${FILE_NAME}/reporting"
+  base_dir: "output/test_dialogue/reporting"
   # connection_string: <azure_blob_storage_connection_string>
   # container_name: <azure_blob_storage_container_name>
 

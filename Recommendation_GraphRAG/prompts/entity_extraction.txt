@@ -4,8 +4,8 @@ Given a text document that is potentially relevant to this activity and a list o
 -Steps-
 1. Identify all entities. For each identified entity, extract the following information:
    - entity_name: Name of the entity, capitalized
-   - entity_type: One of the following types: [movie, actor, genre, director]. It Is mandatory for every entity to have an entity type from the given list. DO NOT LEAVE BLANK!
-   - entity_description: Comprehensive description of the entity's attributes and activities
+   - entity_type: One of the following types: [MOVIE, ACTOR, GENRE, DIRECTOR] (Mandatory for every entity—do not leave blank)
+   - entity_description: If it’s a movie, include: Year of release (if available), Genre(s), Notable actors (if inferred), Director (if inferred), Noteworthy attributes (e.g., awards, cultural impact). If it’s an actor, include: Notable roles, Genre specialization (if applicable). If it’s a director, include: Notable works, Signature style or themes. If it’s a genre, describe typical characteristics
 Format each entity as ("id""entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>)
 
 2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other.
@@ -28,21 +28,20 @@ Entity_types: MOVIE, ACTOR, DIRECTOR, GENRE
 Text:
 User: I loved The Matrix (1999). Keanu Reeves was amazing in it! | Recommender: It was directed by the Wachowskis, and it’s a must-watch for Sci-Fi fans.
 ######################
-Output:
-("entity"{tuple_delimiter}THE MATRIX (1999){tuple_delimiter}MOVIE{tuple_delimiter}A science fiction genre movie starring Keanu Reeves and directed by the Wachowskis.)
-{record_delimiter}
-("entity"{tuple_delimiter}KEANU REEVES{tuple_delimiter}ACTOR{tuple_delimiter}Lead actor in The Matrix (1999))
-{record_delimiter}
-("entity"{tuple_delimiter}WACHOWSKIS{tuple_delimiter}DIRECTOR{tuple_delimiter}Directors of The Matrix (1999))
-{record_delimiter}
-("entity"{tuple_delimiter}SCI-FI{tuple_delimiter}GENRE{tuple_delimiter}The Matrix belongs to the science fiction genre (inferred from general knowledge of the movie))
-{record_delimiter}
-("relationship"{tuple_delimiter}KEANU REEVES{tuple_delimiter}THE MATRIX (1999){tuple_delimiter}Keanu Reeves stars in The Matrix){tuple_delimiter}
-{record_delimiter}
-("relationship"{tuple_delimiter}THE WACHOWSKIS{tuple_delimiter}THE MATRIX (1999){tuple_delimiter}The Wachowskis directed The Matrix){tuple_delimiter}
-{record_delimiter}
-("relationship"{tuple_delimiter}THE MATRIX (1999){tuple_delimiter}SCI-FI{tuple_delimiter}The Matrix belongs to the science fiction genre (inferred)){tuple_delimiter}
-{completion_delimiter}
+("entity"{tuple_delimiter}THE MATRIX (1999){tuple_delimiter}MOVIE{tuple_delimiter}A groundbreaking 1999 science fiction film starring Keanu Reeves, known for its innovative visual effects, cyberpunk themes, and philosophical depth. Directed by the Wachowskis.)  
+{record_delimiter}  
+("entity"{tuple_delimiter}KEANU REEVES{tuple_delimiter}ACTOR{tuple_delimiter}Canadian actor known for action and sci-fi roles, notably starring as Neo in The Matrix (1999).)  
+{record_delimiter}  
+("entity"{tuple_delimiter}WACHOWSKIS{tuple_delimiter}DIRECTOR{tuple_delimiter}Directing duo famous for The Matrix trilogy, known for their complex narratives and cyberpunk aesthetics.)  
+{record_delimiter}  
+("entity"{tuple_delimiter}SCI-FI{tuple_delimiter}GENRE{tuple_delimiter}A genre often featuring futuristic, speculative themes, technology, and alternate realities, as seen in The Matrix (1999).)  
+{record_delimiter}  
+("relationship"{tuple_delimiter}KEANU REEVES{tuple_delimiter}THE MATRIX (1999){tuple_delimiter}Keanu Reeves stars as Neo, the protagonist of The Matrix, a defining role in his career.{tuple_delimiter}9)  
+{record_delimiter}  
+("relationship"{tuple_delimiter}WACHOWSKIS{tuple_delimiter}THE MATRIX (1999){tuple_delimiter}The Wachowskis directed The Matrix, revolutionizing action cinematography.{tuple_delimiter}10)  
+{record_delimiter}  
+("relationship"{tuple_delimiter}THE MATRIX (1999){tuple_delimiter}SCI-FI{tuple_delimiter}The Matrix is a quintessential sci-fi film, featuring dystopian and cyberpunk elements.{tuple_delimiter}8)  
+{completion_delimiter}  
 
 ######################
 Example 2:
@@ -50,17 +49,16 @@ Entity_types: MOVIE, DIRECTOR
 Text:
 User: I just watched Pulp Fiction (1994) again. It's one of my favorites! | Recommender: Quentin Tarantino directed that masterpiece.
 ######################
-Output:
-("entity"{tuple_delimiter}PULP FICTION (1994){tuple_delimiter}MOVIE{tuple_delimiter}A 1994 crime movie directed by Quentin Tarantino (inferred as a crime genre based on general knowledge))
-{record_delimiter}
-("entity"{tuple_delimiter}QUENTIN TARANTINO{tuple_delimiter}DIRECTOR{tuple_delimiter}Director of Pulp Fiction (1994))
-{record_delimiter}
-("entity"{tuple_delimiter}CRIME{tuple_delimiter}GENRE{tuple_delimiter}Pulp Fiction belongs to the crime genre (inferred))
-{record_delimiter}
-("relationship"{tuple_delimiter}QUENTIN TARANTINO{tuple_delimiter}PULP FICTION (1994){tuple_delimiter}Quentin Tarantino directed Pulp Fiction){tuple_delimiter}
-{record_delimiter}
-("relationship"{tuple_delimiter}PULP FICTION (1994){tuple_delimiter}CRIME{tuple_delimiter}Pulp Fiction belongs to the crime genre (inferred)){tuple_delimiter}
-{completion_delimiter}
+("entity"{tuple_delimiter}PULP FICTION (1994){tuple_delimiter}MOVIE{tuple_delimiter}A 1994 crime film directed by Quentin Tarantino, known for its nonlinear storytelling, sharp dialogue, and ensemble cast featuring John Travolta, Samuel L. Jackson, and Uma Thurman.)  
+{record_delimiter}  
+("entity"{tuple_delimiter}QUENTIN TARANTINO{tuple_delimiter}DIRECTOR{tuple_delimiter}Renowned filmmaker known for his signature style of nonlinear storytelling, witty dialogue, and stylized violence. Director of Pulp Fiction (1994).)  
+{record_delimiter}  
+("entity"{tuple_delimiter}CRIME{tuple_delimiter}GENRE{tuple_delimiter}A genre featuring narratives centered around crime, criminals, and moral ambiguity, as exemplified by Pulp Fiction (1994).)  
+{record_delimiter}  
+("relationship"{tuple_delimiter}QUENTIN TARANTINO{tuple_delimiter}PULP FICTION (1994){tuple_delimiter}Quentin Tarantino directed Pulp Fiction, which became one of the most influential films of the 1990s.{tuple_delimiter}10)  
+{record_delimiter}  
+("relationship"{tuple_delimiter}PULP FICTION (1994){tuple_delimiter}CRIME{tuple_delimiter}Pulp Fiction is a defining crime film, featuring intersecting crime-driven narratives.{tuple_delimiter}9)  
+{completion_delimiter}  
 
 ######################
 Example 3:
