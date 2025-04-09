@@ -61,15 +61,19 @@ class CRSConvDataset(Dataset):
                 if context == '':
                     continue
 
-                context_ids = self.tokenizer.convert_tokens_to_ids(self.tokenizer.tokenize(context))
-                context_ids = context_ids[-self.context_max_length:]
-
                 resp = dialog['resp']
                 resp = 'System: ' + resp
+
+                # First tokenize response since it's more important
                 with self.tokenizer.as_target_tokenizer():
                     resp_ids = self.tokenizer.convert_tokens_to_ids(self.tokenizer.tokenize(resp))
                     resp_ids = resp_ids[:self.resp_max_length]
                     resp_ids.append(self.tokenizer.eos_token_id)
+
+                # Then allocate remaining tokens to context
+                remaining_length = self.context_max_length - len(resp_ids)
+                context_ids = self.tokenizer.convert_tokens_to_ids(self.tokenizer.tokenize(context))
+                context_ids = context_ids[-remaining_length:] if remaining_length > 0 else []
 
                 data = {
                     'context': context_ids,
@@ -186,7 +190,7 @@ if __name__ == '__main__':
 
     prompt_tokenizer = AutoTokenizer.from_pretrained('../utils/tokenizer/roberta-base')
 
-    dataset = CRSConvDataset(dataset, 'test', tokenizer=tokenizer, prompt_tokenizer=prompt_tokenizer, debug=debug)
+    dataset = CRSConvDataset(dataset, 'test', tokenizer=tokenizer, debug=debug)
     for i in range(len(dataset)):
         if i == 3:
             break
@@ -194,12 +198,10 @@ if __name__ == '__main__':
         print(data)
         print(tokenizer.decode(data['context']))
         print(tokenizer.decode(data['resp']))
-        print(prompt_tokenizer.decode(data['prompt']))
         print()
 
     data_collator = CRSConvDataCollator(
         tokenizer=tokenizer, device=device, ignore_pad_token_for_loss=True, pad_entity_id=kg['pad_entity_id'],
-        prompt_tokenizer=prompt_tokenizer,
         gen=gen
     )
     dataloader = DataLoader(

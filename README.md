@@ -88,5 +88,12 @@ cd src
 cp -r data/redial/. data/redial_gen/
 cp -r data/redial/. /home/Nema/UniCRS_GraphRAG/UniCRS/data/redial_gen/
 python data/redial_gen/merge.py --gen_file_prefix conversation_prompt
-nohup bash -c "CUDA_VISIBLE_DEVICES=0 accelerate launch train_rec.py --dataset redial_gen --tokenizer microsoft/DialoGPT-small --model microsoft/DialoGPT-small --n_prefix_rec 10 --prompt_encoder /home/Nema/UniCRS_GraphRAG/UniCRS/src/pretrained_prompt/best --num_train_epochs 5 --per_device_train_batch_size 64 --per_device_eval_batch_size 64 --gradient_accumulation_steps 1 --num_warmup_steps 530 --context_max_length 200 --prompt_max_length 200 --entity_max_length 32 --learning_rate 1e-4 --output_dir /home/Nema/UniCRS_GraphRAG/UniCRS/src/recommendation_prompt > rec_train_output.log 2>&1 &"
+nohup bash -c "CUDA_VISIBLE_DEVICES=0 accelerate launch train_rec.py --dataset redial_gen --tokenizer microsoft/DialoGPT-small --model microsoft/DialoGPT-small --n_prefix_rec 10 --prompt_encoder /home/Nema/UniCRS_GraphRAG/UniCRS/src/pretrained_prompt/best --num_train_epochs 5 --per_device_train_batch_size 64 --per_device_eval_batch_size 64 --gradient_accumulation_steps 1 --num_warmup_steps 530 --context_max_length 200 --prompt_max_length 200 --entity_max_length 32 --learning_rate 1e-4 --output_dir /home/Nema/UniCRS_GraphRAG/UniCRS/src/recommendation_prompt > rec_train_output.log 2>&1 &" 
+```
+
+
+
+**Step 5:** Unified Task Training
+```bash
+nohup bash -c "CUDA_VISIBLE_DEVICES=0 accelerate launch train_unified.py --dataset redial --use_prompt_enhancer --tokenizer microsoft/DialoGPT-small --model microsoft/DialoGPT-small --n_prefix_conv 20  --n_prefix_rec 10 --prompt_encoder /home/Nema/UniCRS_GraphRAG/UniCRS/src/pretrained_prompt/best --num_train_epochs 10 --gradient_accumulation_steps 1 --ignore_pad_token_for_loss --per_device_train_batch_size 64 --per_device_eval_batch_size 64 --num_warmup_steps 6345 --context_max_length 200 --resp_max_length 183 --prompt_max_length 200 --entity_max_length 32 --learning_rate 1e-4 --output_dir /home/Nema/UniCRS_GraphRAG/UniCRS/src/unified_prompt > train_unified.log 2>&1 &"
 ```

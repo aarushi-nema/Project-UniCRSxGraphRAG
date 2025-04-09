@@ -648,7 +648,8 @@ class PromptGPT2forCRS(GPT2PreTrainedModel):
             encoder_attention_mask=encoder_attention_mask,
             use_cache=use_cache,
             output_attentions=output_attentions,
-            output_hidden_states=output_hidden_states,
+         output_hidden_states=output_hidden_states,
+            # output_hidden_states=True,
             return_dict=return_dict,
         )
         hidden_states = transformer_outputs[0]
