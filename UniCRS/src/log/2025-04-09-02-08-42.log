@@ -1,7 +1,0 @@
-2025-04-09 02:08:42.381 | INFO     | __main__:<module>:85 - {'seed': 42, 'output_dir': '/home/Nema/UniCRS_GraphRAG/UniCRS/src/unified_prompt', 'debug': False, 'dataset': 'redial', 'context_max_length': 200, 'resp_max_length': 183, 'entity_max_length': 32, 'tokenizer': 'microsoft/DialoGPT-small', 'model': 'microsoft/DialoGPT-small', 'text_encoder': None, 'prompt_encoder': '/home/Nema/UniCRS_GraphRAG/UniCRS/src/pretrained_prompt/best', 'n_prefix_conv': 20, 'n_prefix_rec': 10, 'num_bases': 8, 'num_train_epochs': 10, 'max_train_steps': None, 'per_device_train_batch_size': 64, 'per_device_eval_batch_size': 64, 'gradient_accumulation_steps': 1, 'learning_rate': 0.0001, 'weight_decay': 0.01, 'num_warmup_steps': 6000, 'max_grad_norm': None, 'mixed_precision': 'no', 'num_workers': 0, 'use_wandb': False, 'entity': None, 'project': None, 'name': None, 'log_all': False, 'use_enhancer': True}
-2025-04-09 02:13:32.950 | INFO     | __main__:<module>:274 - ***** Running unified training *****
-2025-04-09 02:13:32.951 | INFO     | __main__:<module>:275 -   Num conversation examples = 102452
-2025-04-09 02:13:32.951 | INFO     | __main__:<module>:276 -   Num recommendation examples = 182293
-2025-04-09 02:13:32.951 | INFO     | __main__:<module>:277 -   Num Epochs = 10
-2025-04-09 02:13:32.951 | INFO     | __main__:<module>:278 -   Batch size per device = 64
-2025-04-09 02:13:32.951 | INFO     | __main__:<module>:279 -   Total optimization steps = 44500
